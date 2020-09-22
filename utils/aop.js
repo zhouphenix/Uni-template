@@ -1,4 +1,3 @@
-const TAG = '[aop]'
 Function.prototype._before = function(beforefn) {
 	let _self = this;
 	return function() {
