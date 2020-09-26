@@ -3,8 +3,8 @@ import App from './App'
 import phenix from '@/plugins/phenix.js'
 
 import mixinsCommon from '@/mixins/index.js'
-
-window.$mixinsCommon = mixinsCommon
+//将 mixinsCommon 挂载到uni上， 方便使用
+uni.$mixinsCommon = mixinsCommon
 Vue.use(phenix)
 
 Vue.config.productionTip = false

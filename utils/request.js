@@ -8,7 +8,7 @@ const interceptors = {
 			this.interceptors.push(func)
 		},
 		intercept(config, url, method, data) {
-			// console.log(`--> request:intercept(${this.interceptors.length}) `, config, url, method, data);
+			console.log(`--> request:intercept(${this.interceptors.length}) `, config, url, method, data);
 			this.interceptors.forEach(it => {
 				config = it(config, url, method, data)
 			})
@@ -21,7 +21,7 @@ const interceptors = {
 			this.interceptors.push(func)
 		},
 		intercept(response, url, method, data) {
-			// console.log(`--> response:intercept(${this.interceptors.length}) `, response, url, method, data);
+			console.log(`--> response:intercept(${this.interceptors.length}) `, response, url, method, data);
 			this.interceptors.forEach(it => {
 				response = it(response, url, method, data)
 			})
@@ -89,7 +89,6 @@ export default function({
 				timer = setTimeout(_ => {
 					overtime = true // 将状态标记为超时，不会被 fail 中的 onerror 重复执行
 					requestTask.abort() // 执行取消请求方法
-					this.onerror(method, url, data, '网络请求失败：超时取消')
 					reject('网络请求时间超时') // reject 原因
 				}, timeout || 15000) // 设定检测超时定时器
 
@@ -152,6 +151,7 @@ export default function({
 			method = 'downloadFile',
 			data = {},
 			header,
+			onProgressUpdate,
 			reqIntercept = true,
 			resIntercept = true
 		}) {
@@ -162,9 +162,7 @@ export default function({
 					requestTask ? requestTask.abort() : '' // 执行取消请求方法
 				},
 				timer, // timer 检测超时定时器
-				overtime = false, // overtime 请求是否超时
-				progressUpdateHandle,
-				onProgressUpdate = e => progressUpdateHandle = e // progressUpdateHandle 监听上传进度变化回调，onProgressUpdate 监听上传进度变化方法
+				overtime = false // overtime 请求是否超时
 
 			// header传入
 			let config = {
@@ -189,11 +187,10 @@ export default function({
 				timer = setTimeout(_ => {
 					overtime = true // 将状态标记为超时，不会被 fail 中的 onerror 重复执行
 					requestTask.abort() // 执行取消请求方法
-					this.onerror(method, url, data, '网络请求失败：超时取消')
 					reject('网络请求时间超时') // reject 原因
 				}, timeout || 15000) // 设定检测超时定时器
 
-				requestTask = uni.request({
+				requestTask = uni[method]({
 					url: url[0] === '/' ? baseUrl + url : url,
 					name: data.name,
 					header,
@@ -210,7 +207,7 @@ export default function({
 								// 执行响应拦截器
 								res = this.interceptors.response.intercept(res, url, method, data) // 执行响应拦截器
 							}
-							resolve(res.data)
+							resolve(res)
 						}
 					},
 
@@ -227,7 +224,7 @@ export default function({
 
 				})
 
-				requestTask.onProgressUpdate(progressUpdateHandle) // 监听下载进度变化
+				requestTask.onProgressUpdate(onProgressUpdate) // 监听下载进度变化
 
 			})
 			let handler = {
@@ -330,25 +327,27 @@ export default function({
 				}
 			})
 		},
-		upload(url, data, header) {
+		upload(url, onProgressUpdate, data, header) {
 			return this.file({
 				url,
 				method: 'uploadFile',
 				data,
 				header: { ...header,
 					...headers
-				}
+				},
+				onProgressUpdate
 			})
 		},
-		download(url, data, header) {
+		download(url, onProgressUpdate, data, header) {
 			return this.file({
 				url,
 				method: 'downloadFile',
 				data,
 				header: { ...header,
 					...headers
-				}
+				},
+				onProgressUpdate
 			})
-		},
+		}
 	}
 }
