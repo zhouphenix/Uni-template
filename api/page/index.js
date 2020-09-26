@@ -8,10 +8,7 @@ export function get() {
 	)
 }
 
-export function downloadFile() {
-	let downloadCallback = res => {
-		console.log('回调：', res)
-	}
+export function downloadFile(downloadCallback) {
 	return request.download('https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2980445260,41238050&fm=26&gp=0.jpg',
 		downloadCallback)
 }

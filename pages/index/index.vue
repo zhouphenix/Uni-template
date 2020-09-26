@@ -70,7 +70,17 @@
 			// 	.catch(e => {
 			// 		console.error('error:', e)
 			// 	})
-			// this.api.downloadFile()
+			
+			// let downloadCallback = res => {
+			// 	console.log('回调：', res)
+			// }
+			// this.api.downloadFile(downloadCallback)
+			// 	.then(res => {
+			// 		console.log("res: ", res);
+			// 	})
+			// 	.catch(e => {
+			// 		console.error('error:', e)
+			// 	})
 		},
 
 		methods: {

@@ -8,7 +8,7 @@
 **【注意】** 
 + 1. 不带参数写法
 	```JavaScript
-	export const deltaTime = (target, property, descriptor) => do(target, property, descriptor, args)
+	export const deltaTime = (target, property, descriptor) => do(target, property, descriptor)
 	}
 	```
 + 2. 带参数写法
@@ -28,10 +28,71 @@
 	2. 方便加入自己的需求
 	3. 顺便带着问题梳理下逻辑
 ### 2.3 如何调用？
-
-
 	
++ GET请求
+	```
+	// api/page/module1.js
+	export function get() {
+		return request.get(url, data, header)
+	}
+	// page/module1.vue
+	this.api.get()
+		.then(res => {
+			console.log("res: ", res);
+		})
+		.catch(e => {
+			console.error('error:', e)
+		})
+	```
++ 自定义请求
+	```
+	// api/page/module1.js
+	export function request(args) {
+		return request.request(args)
+	}
+	// page/module1.vue
+	this.api.request({
+			url,
+			method ,
+			data,
+			header,
+			reqIntercept ,
+			resIntercept
+		})
+		.then(res => {
+			console.log("res: ", res);
+		})
+		.catch(e => {
+			console.error('error:', e)
+		})
+	```
 
++ Download请求
+	```
+	// api/page/module1.js
+	export function downloadFile(onProgressUpdate) {
+		return request.download(url, onProgressUpdate, data, header)
+	}
+	// page/module1.vue
+	let downloadCallback = res => {
+		console.log('下载进度回调：', res)
+	}
+	this.api.downloadFile(downloadCallback)
+		.then(res => {
+			console.log("res: ", res);
+		})
+		.catch(e => {
+			console.error('error:', e)
+		})
+	```
++ 取消请求
+	```
+	const task = request.get(url) 
+	task.then(res => {
+	    console.log(res)
+	}).catch(e => console.error(e)) // 网络请求失败：主动取消
+	task.abort()
+	```
 
 ## 附1 await + async 注意，在异步事件中使用， 同步事件中会特别耗时
 
