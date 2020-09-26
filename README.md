@@ -1,5 +1,5 @@
 # Uni-template
-<<<<<<< HEAD
+
 基于aop，继承思想，搭建一个uni-app框架模板(暂时想到哪里写到哪里)
 
 ## 一、 修饰器 @decorator
@@ -24,7 +24,7 @@
 	2. 代码小，够简洁 （200多行）; 
 	3. 其中封装的方式可借鉴学习（比如定义拦截器， 代理Proxy使用， 还有如何去封装修改固有的接口调用模式）
 ### 2.2 为什么没有直接拿来用？
-	1. 别人的代码总是看着不顺眼^_^（爱找茬是不？）
+	1. 别人的代码总是看着不顺眼^_^（爱找茬是不!）
 	2. 方便加入自己的需求
 	3. 顺便带着问题梳理下逻辑
 ### 2.3 如何调用？
@@ -37,22 +37,3 @@
 
 ## 附2 [Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight respon](https://blog.csdn.net/yangyiboshigou/article/details/78738228)
 
-=======
-基于aop，继承思想，搭建一个uni-app框架模板 
-
-## 修饰器 @decorator
-> 文章： [ECMAScript 6 入门- 装饰器](https://es6.ruanyifeng.com/#docs/decorator)
-
-**【注意】** 
-1. 不带参数写法
-	`JavaScript
-	export const deltaTime = (target, property, descriptor) => do(target, property, descriptor, args)
-	}
-	`
-2. 带参数写法
-	`JavaScript
-	export const deltaTime = function(...args) {
-		return (target, property, descriptor) => do(target, property, descriptor, args)
-	}
-	`
->>>>>>> 8b511bdf8bd06d6f08abd17762bbcd2553f6511a
