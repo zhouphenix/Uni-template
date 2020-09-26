@@ -16,9 +16,12 @@
 		after,
 		around
 	} from './decorator.js'
+	
 	import {
-		deltaTime
-	} from '@/decorators/index.js'
+			deltaTime,
+			report
+		} from '@/decorators/index.js'
+	
 
 	export default uni.$mixinsCommon({
 		data() {
@@ -59,10 +62,13 @@
 
 
 
-		// @deltaTime
+		@deltaTime
 		// @before('1', 2, ['12'], _ => {})
 		onLoad() {
 			console.log('onload')
+			
+			this.test()
+			
 			// this.api.get()
 			// 	.then(res => {
 			// 		console.log("res: ", res);
@@ -84,7 +90,7 @@
 		},
 
 		methods: {
-			// @around
+			// @around()
 			test() {
 				console.log('test::')
 			}

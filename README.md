@@ -95,11 +95,11 @@
 	}).catch(e => console.error(e)) // 网络请求失败：主动取消
 	task.abort()
 	```
-## 项目结构
+## 三、项目结构
 
 
 
-## 附1 await + async 注意，在异步事件中使用， 同步事件中会特别耗时
+## 附1 注意await + async 要在异步事件中使用， 如果在同步事件中使用会特别耗时
 
 ## 附2 [Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight respon](https://blog.csdn.net/yangyiboshigou/article/details/78738228)
 
