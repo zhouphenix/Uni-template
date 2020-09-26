@@ -19,7 +19,6 @@ export default (app, option = {}) => {
 		onHide() {
 			console.log(TAG, "onHide ");
 		},
-
 		onUnload() {
 			console.log(TAG, "onUnload ");
 		}
