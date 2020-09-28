@@ -7,6 +7,12 @@ export default (app, option = {}) => {
 			}
 		},
 
+		onEvent() {
+			return {
+				'onClick': this.get
+			}
+		},
+
 		onLoad() {
 			console.log(TAG, "onLoad ");
 		},

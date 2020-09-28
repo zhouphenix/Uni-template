@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view >
 		<!-- 左侧显示略缩图、图标 -->
 		<uni-list>
 			<uni-list-item v-for="(item, index) in records" :key="index" :show-extra-icon="true" :thumb-size="item.thumbSize"
@@ -43,7 +43,7 @@
 						type: 'plusempty'
 					},
 					thumbSize: 'lg',
-					title: '调试@decorator',
+					title: '调试@decorator（小程序配置失败@Q1）',
 					note: '包括@before、 @around、 @after 、@deltaTime,\n使用范围：在page页面内使用， App.vue 不会生效\n2020/09/22',
 					rightText: 'TODO'
 				}, {
@@ -61,11 +61,12 @@
 		},
 
 
-
-		@deltaTime
+		// #ifndef MP
+			@deltaTime
+		// #endif
 		// @before('1', 2, ['12'], _ => {})
 		onLoad() {
-			console.log('onload')
+			console.log('onload', process.env.VUE_APP_DISABLED)
 			
 			this.test()
 			
