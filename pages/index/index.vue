@@ -66,7 +66,7 @@
 		// #endif
 		// @before('1', 2, ['12'], _ => {})
 		onLoad() {
-			console.log('onload', process.env.VUE_APP_DISABLED)
+			console.log('onload', process.env.VUE_APP_PLATFORM)
 			
 			this.test()
 			

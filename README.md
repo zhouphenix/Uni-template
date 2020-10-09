@@ -103,3 +103,4 @@
 
 ## 附2 [Request header field Content-Type is not allowed by Access-Control-Allow-Headers in preflight respon](https://blog.csdn.net/yangyiboshigou/article/details/78738228)
 
+## 附3 [全局常量定义](https://blog.csdn.net/junjiahuang/article/details/108337333)
